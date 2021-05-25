@@ -1,31 +1,24 @@
-[![Build Status](https://travis-ci.com/tiangolo/docker-with-compose.svg?branch=master)](https://travis-ci.com/tiangolo/docker-with-compose)
-
-## Supported tags and respective `Dockerfile` links
-
-* [`latest` _(Dockerfile)_](https://github.com/tiangolo/docker-with-compose/blob/master/Dockerfile)
-
-# Docker with Docker Compose image
-
-[Docker image](https://hub.docker.com/_/docker/) with [Docker Compose](https://github.com/docker/compose) installed for CI.
-
 ## Description
 
 The main purpose of this image is to help in Continuous Integration environments that need the `docker` binary, the `docker-compose` binary, and possibly require doing other small things, like running shell scripts or notifying some API with `curl`.
 
-It includes both programs (`docker` and `docker-compose`) and allows to run arbitrary shell scripts (contrary to the official Docker Compose image).
+It includes (`docker`,`docker-compose` and `ansible`) and allows to run arbitrary shell scripts (contrary to the official Docker Compose image).
 
 By not having to install `docker-compose` on top of a `docker:latest` image it can reduce the building time about 10 / 15 seconds in a cloud data center for each build. In environments in where the Internet connection is less good than a cloud provider, the time saved would be more.
 
-**GitHub repo**: <https://github.com/tiangolo/docker-with-compose>
 
-**Docker Hub image**: <https://hub.docker.com/r/tiangolo/docker-with-compose/>
+**GitHub repo**: <https://github.com/2start/docker-compose-ansible>
+
+**Largly copied from**: <https://github.com/tiangolo/docker-with-compose>
+
+**Docker Hub image**: <https://hub.docker.com/r/start2/docker-compose-ansible/>
 
 ## Usage
 
 Pull the image:
 
 ```bash
-docker pull tiangolo/docker-with-compose
+docker pull start2/docker-compose-ansible
 ```
 
 Then run a container of this image **mounting the Docker sock** as a host volume.
@@ -53,7 +46,7 @@ You could:
 * Build that Nginx image from inside of container running this image.
 
 ```bash
-docker run -v $(pwd):/app -v /var/run/docker.sock:/var/run/docker.sock tiangolo/docker-with-compose sh -c "cd /app/ && docker build -t custom-nginx ."
+docker run -v $(pwd):/app -v /var/run/docker.sock:/var/run/docker.sock start2/docker-compose-ansibl sh -c "cd /app/ && docker build -t custom-nginx ."
 ```
 
 ## Problem description
@@ -108,7 +101,7 @@ This image includes Docker Compose and allows you to run any other arbitrary com
 So your GitLab CI `.gitlab-ci.yml` file could then look like:
 
 ```yml
-image: tiangolo/docker-with-compose
+image: start2/docker-compose-ansible
 
 before_script:
   - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -132,10 +125,7 @@ The same would apply for Travis, Jenkins or whichever CI system you use.
 
 ## Latest Changes
 
-* Upgrade Python to use version 3.x. PR [#15](https://github.com/tiangolo/docker-with-compose/pull/15).
-* Add `curl` to the installed and available packages. PR [#14](https://github.com/tiangolo/docker-with-compose/pull/14) by [@stratosgear](https://github.com/stratosgear).
-* Add Travis CI. PR [#4](https://github.com/tiangolo/docker-with-compose/pull/4).
-* Upgrade Docker Compose installation. PR [#3](https://github.com/tiangolo/docker-with-compose/pull/3) by [@boskiv](https://github.com/boskiv).
+* Copied and adapted repo from [Tiangolo](https://github.com/tiangolo/docker-with-compose).
 
 ## License
 
