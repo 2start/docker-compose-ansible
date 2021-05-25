@@ -1,4 +1,4 @@
-dist: xenial
+dist: focal
 
 services:
   - docker
@@ -10,4 +10,4 @@ deploy:
   provider: script
   script: bash scripts/deploy.sh
   on:
-    branch: master
+    branch: main
